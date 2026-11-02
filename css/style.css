@@ -243,6 +243,9 @@ html.lenis body {
 /* ---------- Hero ---------- */
 
 .hero {
+  /* Shared by the moving name and the location pill that sits on top of it. */
+  --name-size: clamp(88px, 15vw, 232px);
+  --name-bottom: clamp(12px, 4vh, 44px);
   position: relative;
   height: 100svh;
   min-height: 640px;
@@ -272,7 +275,7 @@ html.lenis body {
 
 .hero__location {
   position: absolute;
-  top: 46%;
+  bottom: calc(var(--name-bottom) + var(--name-size));
   left: 0;
   display: flex;
   align-items: center;
@@ -312,11 +315,12 @@ html.lenis body {
   to { transform: scaleX(-1); }
 }
 
+/* Starts just past the portrait's shoulder, so it follows the photo's height as well as the page width. */
 .hero__role {
   position: absolute;
   top: 36%;
   right: var(--gutter);
-  width: min(360px, 30vw);
+  left: calc(50% + max(16vw, 21svh + 64px, 200px));
   font-size: clamp(20px, 2.1vw, 32px);
   line-height: 1.25;
 }
@@ -334,7 +338,7 @@ html.lenis body {
 .marquee {
   position: absolute;
   right: 0;
-  bottom: clamp(12px, 4vh, 44px);
+  bottom: var(--name-bottom);
   left: 0;
   overflow: hidden;
   pointer-events: none;
@@ -349,10 +353,10 @@ html.lenis body {
 .marquee__item {
   display: flex;
   align-items: center;
-  padding-right: 0.3em;
-  font-size: clamp(88px, 15vw, 232px);
+  padding-right: 0.24em;
+  font-size: var(--name-size);
   line-height: 1;
-  letter-spacing: 0;
+  letter-spacing: -0.03em;
   white-space: nowrap;
 }
 
@@ -361,7 +365,7 @@ html.lenis body {
   display: inline-block;
   width: 0.42em;
   height: 0.05em;
-  margin-left: 0.3em;
+  margin-left: 0.24em;
   background: currentColor;
 }
 
@@ -1035,6 +1039,7 @@ html.lenis body {
 
   .hero__location {
     top: 20%;
+    bottom: auto;
   }
 
   .footer__rule .circle-btn {
