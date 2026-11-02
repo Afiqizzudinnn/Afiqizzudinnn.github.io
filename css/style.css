@@ -19,7 +19,7 @@
   --navy: #1e3a8a;
   --navy-hover: #2747a8;
 
-  /* Warm studio grey behind the cut-out portrait. */
+  /* Sampled from the portrait's studio backdrop, so the photo blends into the hero. */
   --hero-center: #847e7d;
   --hero-mid: #716b6b;
   --hero-edge: #5b5655;
@@ -251,7 +251,7 @@ html.lenis body {
   color: var(--white);
 }
 
-/* A cut-out portrait with a transparent background, so it sits cleanly on the hero grey. */
+/* The studio portrait, with its edges faded into the matching hero grey. */
 .hero__photo {
   position: absolute;
   bottom: 0;
@@ -260,6 +260,14 @@ html.lenis body {
   max-width: none;
   height: 92%;
   transform: translateX(-50%);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 18%, #000 82%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 14%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 18%, #000 82%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 14%);
+  mask-composite: intersect;
 }
 
 .hero__location {
