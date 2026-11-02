@@ -19,7 +19,7 @@
   --navy: #1e3a8a;
   --navy-hover: #2747a8;
 
-  /* Sampled from the portrait's studio backdrop, so the photo blends into the hero. */
+  /* Warm studio grey behind the cut-out portrait. */
   --hero-center: #847e7d;
   --hero-mid: #716b6b;
   --hero-edge: #5b5655;
@@ -251,6 +251,7 @@ html.lenis body {
   color: var(--white);
 }
 
+/* A cut-out portrait with a transparent background, so it sits cleanly on the hero grey. */
 .hero__photo {
   position: absolute;
   bottom: 0;
@@ -259,14 +260,6 @@ html.lenis body {
   max-width: none;
   height: 92%;
   transform: translateX(-50%);
-  -webkit-mask-image:
-    linear-gradient(to right, transparent 0, #000 18%, #000 82%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 14%);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(to right, transparent 0, #000 18%, #000 82%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 14%);
-  mask-composite: intersect;
 }
 
 .hero__location {
@@ -502,9 +495,17 @@ html.lenis body {
   margin-top: clamp(40px, 6vw, 72px);
 }
 
+/* Every card starts the same; the one you hover or open turns navy, so only one stands out at a time. */
 .impact-card {
   border-radius: var(--radius-card);
   background: var(--paper);
+  transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out);
+}
+
+.impact-card:hover,
+.impact-card[open] {
+  background: var(--navy);
+  color: var(--white);
 }
 
 /* The card opens like an accordion where the browser supports animating to auto height. */
@@ -559,6 +560,7 @@ html.lenis body {
 .impact-card__meta {
   color: var(--ink-muted);
   font-size: 13px;
+  transition: color 0.4s var(--ease-out);
 }
 
 .impact-card__toggle {
@@ -607,21 +609,18 @@ html.lenis body {
   margin: 0;
 }
 
-.impact-card--accent {
-  background: var(--navy);
-  color: var(--white);
-}
-
-.impact-card--accent .impact-card__meta,
-.impact-card--accent .impact-card__story dt {
+.impact-card:hover .impact-card__meta,
+.impact-card[open] .impact-card__meta,
+.impact-card[open] .impact-card__story dt {
   color: rgba(255, 255, 255, 0.65);
 }
 
 .impact__note {
-  max-width: 72ch;
-  margin-top: 32px;
+  max-width: 64ch;
+  margin: 40px auto 0;
   color: var(--ink-muted);
   font-size: 15px;
+  text-align: center;
 }
 
 /* ---------- Tools ---------- */
@@ -827,23 +826,26 @@ html.lenis body {
   gap: clamp(16px, 2vw, 28px);
 }
 
-/* A face crop of the hero portrait. */
+/* A face crop of the hero portrait: the photo is enlarged and the centre of the head
+   (about 56% across and 21% down the image) is moved to the centre of the circle. */
 .footer__avatar {
+  position: relative;
   flex: none;
   width: clamp(64px, 7vw, 110px);
   aspect-ratio: 1;
   overflow: hidden;
   border-radius: 50%;
-  background: var(--hero-mid);
+  background: var(--hero-center);
 }
 
 .footer__avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 0;
-  transform: scale(2.1);
-  transform-origin: 54% 20%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  max-width: none;
+  height: auto;
+  transform: translate(-55.7%, -20.5%);
 }
 
 .footer__title {
@@ -1008,6 +1010,7 @@ html.lenis body {
     grid-column: 1 / -1;
   }
 
+  /* On small screens the title sits over the busy batik pattern, so a soft shadow keeps it readable. */
   .hero__role {
     top: auto;
     right: auto;
@@ -1015,6 +1018,7 @@ html.lenis body {
     left: var(--gutter);
     width: auto;
     font-size: 20px;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
   }
 
   .hero__arrow {
