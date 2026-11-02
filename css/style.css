@@ -10,7 +10,6 @@
   --canvas: #1c1d20;
   --white: #ffffff;
   --fog: #999d9e;
-  --graphite: #494a4d;
   --ink-soft: #3d3e42;
   --ink-muted: #55565a;
   --paper: #f3f3f3;
@@ -243,7 +242,7 @@ html.lenis body {
 /* ---------- Hero ---------- */
 
 .hero {
-  /* Shared by the moving name and the location pill that sits on top of it. */
+  /* Shared by the moving name and the location line that sits on top of it. */
   --name-size: clamp(88px, 15vw, 232px);
   --name-bottom: clamp(12px, 4vh, 44px);
   position: relative;
@@ -273,46 +272,14 @@ html.lenis body {
   mask-composite: intersect;
 }
 
+/* Ends just before the portrait's left arm, which reaches further out than the right one. */
 .hero__location {
   position: absolute;
-  bottom: calc(var(--name-bottom) + var(--name-size));
-  left: 0;
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  padding: 18px 18px 18px var(--gutter);
-  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
-  background: var(--canvas);
-  font-size: 15px;
+  right: calc(50% + max(17vw, 27svh + 60px, 240px));
+  bottom: calc(var(--name-bottom) + var(--name-size) + 24px);
+  font-size: clamp(16px, 1.6vw, 26px);
   line-height: 1.25;
-}
-
-.hero__globe {
-  display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--graphite);
-}
-
-.hero__globe svg {
-  width: 26px;
-  height: 26px;
-  fill: none;
-  stroke: var(--white);
-  stroke-width: 1.2;
-}
-
-.hero__globe-spin {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: globe-spin 3s ease-in-out infinite alternate;
-}
-
-@keyframes globe-spin {
-  from { transform: scaleX(1); }
-  to { transform: scaleX(-1); }
+  white-space: nowrap;
 }
 
 /* Starts just past the portrait's shoulder, so it follows the photo's height as well as the page width. */
@@ -1038,8 +1005,12 @@ html.lenis body {
   }
 
   .hero__location {
-    top: 20%;
+    top: 120px;
+    right: auto;
     bottom: auto;
+    left: var(--gutter);
+    font-size: 16px;
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
   }
 
   .footer__rule .circle-btn {
@@ -1056,17 +1027,6 @@ html.lenis body {
 
   .topbar__nav {
     gap: 16px;
-  }
-
-  .hero__location {
-    gap: 16px;
-    padding: 12px 12px 12px var(--gutter);
-    font-size: 13px;
-  }
-
-  .hero__globe {
-    width: 44px;
-    height: 44px;
   }
 
   .footer__bottom .footer__socials {
