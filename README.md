@@ -8,7 +8,7 @@ Portfolio of **Ahmad Afiq Izzudin**, Business Process & Automation Analyst in Ku
 
 ## What is on the page
 
-1. **Hero** with a moving name and a short intro.
+1. **Hero** set like a magazine cover: the name, the role and the portrait.
 2. **What I do**, in one sentence.
 3. **Real impact** from automation projects at Worldline, each with the problem, what I did and the result.
 4. **Tools I built**: [Data Cleaner](https://afiqizzudinnn.github.io/excel-data-cleaner/), [Report Merger](https://afiqizzudinnn.github.io/excel-report-merger/) and [ROI Calculator](https://afiqizzudinnn.github.io/automation-roi-calculator/), all free and open source.
@@ -17,7 +17,7 @@ Portfolio of **Ahmad Afiq Izzudin**, Business Process & Automation Analyst in Ku
 
 ## How it is built
 
-No framework, no build step and no server. Plain HTML, CSS and JavaScript modules, with [Lenis](https://github.com/darkroomengineering/lenis) for smooth scrolling and [Instrument Sans](https://fonts.google.com/specimen/Instrument+Sans) for type. Each script does one job:
+No framework, no build step and no server. Plain HTML, CSS and JavaScript modules, with [Lenis](https://github.com/darkroomengineering/lenis) for smooth scrolling, [Instrument Sans](https://fonts.google.com/specimen/Instrument+Sans) for type and [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) for the name. Each script does one job:
 
 ```
 index.html              page markup and content
@@ -26,7 +26,6 @@ js/intro-check.js       decides before the first paint whether the intro plays
 js/main.js              starts everything below
 js/preloader.js         the "Hello, Hai, Selamat datang" intro
 js/smooth-scroll.js     smooth scrolling and in-page links
-js/marquee.js           the moving name in the hero
 js/reveal.js            words and blocks that rise into view
 js/tool-preview.js      the screenshot that follows the mouse over the tools
 js/footer-curve.js      the curved edge above the footer

@@ -3,7 +3,6 @@
  */
 import { initClock } from './clock.js';
 import { initFooterCurve } from './footer-curve.js';
-import { initMarquee } from './marquee.js';
 import { playIntro } from './preloader.js';
 import { initReveal } from './reveal.js';
 import { initSmoothScroll } from './smooth-scroll.js';
@@ -13,7 +12,6 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 const scroller = initSmoothScroll({ enabled: !reduceMotion });
 playIntro(document.querySelector('.preloader'), scroller);
-initMarquee(document.querySelector('.marquee__track'), scroller, { reduceMotion });
 initReveal({ reduceMotion });
 initToolPreview(document.querySelector('.tool-list'), document.querySelector('.tool-preview'));
 initFooterCurve(document.querySelector('.footer__curve'));

@@ -1,7 +1,8 @@
 /*
  * Afiq Izzudin, portfolio
  * Editorial feel inspired by dennissnellenberg.com, with its own identity:
- * a warm grey hero taken from the portrait, a white middle, a near-black footer and one navy accent.
+ * a dark warm grey hero taken from the portrait, a white middle, a near-black footer and one navy accent.
+ * The name is set in Instrument Serif, the serif sister of the body font.
  */
 
 /* ---------- Tokens ---------- */
@@ -18,12 +19,13 @@
   --navy: #1e3a8a;
   --navy-hover: #2747a8;
 
-  /* Sampled from the portrait's studio backdrop, so the photo blends into the hero. */
-  --hero-center: #847e7d;
-  --hero-mid: #716b6b;
-  --hero-edge: #5b5655;
+  /* Sampled from the portrait's darkened studio backdrop, so the photo blends into the hero. */
+  --hero-center: #3a3635;
+  --hero-mid: #302d2c;
+  --hero-edge: #252322;
 
   --font: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
   --tracking: 0.02em;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
@@ -241,114 +243,106 @@ html.lenis body {
 
 /* ---------- Hero ---------- */
 
+/* An editorial cover: the name on the left, the portrait right of centre, lit from behind. */
 .hero {
-  /* Shared by the moving name and the location line that sits on top of it. */
-  --name-size: clamp(88px, 15vw, 232px);
-  --name-bottom: clamp(12px, 4vh, 44px);
   position: relative;
   height: 100svh;
   min-height: 640px;
   overflow: hidden;
-  background: radial-gradient(ellipse 75% 85% at 50% 30%, var(--hero-center) 0%, var(--hero-mid) 55%, var(--hero-edge) 100%);
+  background: radial-gradient(ellipse 55% 95% at 66% 57%, var(--hero-center) 0%, var(--hero-mid) 50%, var(--hero-edge) 100%);
   color: var(--white);
 }
 
-/* The studio portrait, with its edges faded into the matching hero grey. */
+/* The studio portrait, its backdrop darkened to the hero grey and its edges faded out.
+   It is enlarged so the frame cuts mid-torso, above the elbows, and the face reads bigger. */
 .hero__photo {
   position: absolute;
-  bottom: 0;
-  left: 50%;
+  top: -4%;
+  left: 66%;
   width: auto;
   max-width: none;
-  height: 92%;
+  height: 139%;
   transform: translateX(-50%);
   -webkit-mask-image:
-    linear-gradient(to right, transparent 0, #000 18%, #000 82%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 14%);
+    linear-gradient(to right, transparent 0, #000 14%, #000 88%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 12%);
   -webkit-mask-composite: source-in;
   mask-image:
-    linear-gradient(to right, transparent 0, #000 18%, #000 82%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 14%);
+    linear-gradient(to right, transparent 0, #000 14%, #000 88%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 12%);
   mask-composite: intersect;
 }
 
-/* Ends just before the portrait's left arm, which reaches further out than the right one. */
-.hero__location {
+.hero__intro {
   position: absolute;
-  right: calc(50% + max(17vw, 27svh + 60px, 240px));
-  bottom: calc(var(--name-bottom) + var(--name-size) + 24px);
-  font-size: clamp(16px, 1.6vw, 26px);
-  line-height: 1.25;
-  white-space: nowrap;
+  bottom: clamp(32px, 8svh, 88px);
+  left: var(--gutter);
+  z-index: 1;
 }
 
-/* Starts just past the portrait's shoulder, so it follows the photo's height as well as the page width. */
-.hero__role {
-  position: absolute;
-  top: 36%;
-  right: var(--gutter);
-  left: calc(50% + max(16vw, 21svh + 64px, 200px));
-  font-size: clamp(20px, 2.1vw, 32px);
-  line-height: 1.25;
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(64px, min(12vw, 21svh), 200px);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
 }
 
-.hero__arrow {
+/* Each line of the name slides up from behind its own edge when the intro ends. */
+.hero__line {
   display: block;
-  width: 22px;
-  height: 22px;
-  margin-bottom: 28px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.4;
-}
-
-.marquee {
-  position: absolute;
-  right: 0;
-  bottom: var(--name-bottom);
-  left: 0;
   overflow: hidden;
-  pointer-events: none;
+  /* Room for the tail of the q. */
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
 }
 
-.marquee__track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
+.hero__line > span {
+  display: block;
 }
 
-.marquee__item {
-  display: flex;
-  align-items: center;
-  padding-right: 0.24em;
-  font-size: var(--name-size);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  white-space: nowrap;
+.hero__role {
+  margin-top: clamp(20px, 5svh, 48px);
+  font-size: clamp(18px, 1.9vw, 30px);
+  line-height: 1.3;
 }
 
-/* The separator after the name is a drawn line, not a dash character. */
-.marquee__dash {
-  display: inline-block;
-  width: 0.42em;
-  height: 0.05em;
-  margin-left: 0.24em;
+/* A short drawn rule above the location, like a caption under a cover photo. */
+.hero__location {
+  margin-top: clamp(28px, 8svh, 80px);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+}
+
+.hero__location::before {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 1px;
+  margin-bottom: 14px;
   background: currentColor;
 }
 
 /* The hero rises into place as the intro curtain lifts. */
 .hero__photo,
-.hero__location,
 .hero__role,
-.marquee {
+.hero__location,
+.hero__line > span {
   transition: translate 1.2s var(--ease-out) 0.15s;
 }
 
+.hero__line:nth-child(2) > span {
+  transition-delay: 0.23s;
+}
+
 .is-intro .hero__photo,
-.is-intro .hero__location,
 .is-intro .hero__role,
-.is-intro .marquee {
+.is-intro .hero__location {
   translate: 0 60px;
+}
+
+.is-intro .hero__line > span {
+  translate: 0 110%;
 }
 
 /* ---------- Buttons and links ---------- */
@@ -989,28 +983,33 @@ html.lenis body {
     grid-column: 1 / -1;
   }
 
-  /* On small screens the title sits over the busy batik pattern, so a soft shadow keeps it readable. */
-  .hero__role {
-    top: auto;
-    right: auto;
-    bottom: calc(15vw + 64px);
-    left: var(--gutter);
-    width: auto;
-    font-size: 20px;
-    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+  /* On narrow screens the name moves to the top and the portrait sits below it. */
+  .hero {
+    background: radial-gradient(ellipse 90% 70% at 50% 70%, var(--hero-center) 0%, var(--hero-mid) 50%, var(--hero-edge) 100%);
   }
 
-  .hero__arrow {
-    margin-bottom: 14px;
+  .hero__photo {
+    top: 34%;
+    left: 50%;
+    height: 80%;
+  }
+
+  .hero__intro {
+    top: clamp(96px, 14svh, 132px);
+    bottom: auto;
+  }
+
+  .hero__name {
+    font-size: clamp(56px, 15vw, 112px);
+  }
+
+  .hero__role {
+    margin-top: 16px;
+    font-size: 18px;
   }
 
   .hero__location {
-    top: 120px;
-    right: auto;
-    bottom: auto;
-    left: var(--gutter);
-    font-size: 16px;
-    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+    margin-top: 20px;
   }
 
   .footer__rule .circle-btn {
